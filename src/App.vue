@@ -13,7 +13,7 @@
       @stateChange="onGoodStateChange"
       @countChange="onGoodCountChange"
     ></es-goods>
-    <es-footer :total="total" :amount="amount" @fullChange="onFullStateChange"></es-footer>
+    <es-footer :total="total" :amount="amount" :isfull = "isFull" @fullChange="onFullStateChange"></es-footer>
   </div>
 </template>
 
@@ -87,6 +87,10 @@ export default {
           num += x.goods_count
         })
       return num;
+    },
+    // 是否全选
+    isFull() {
+      return this.goodslist.every(x => x.goods_state);
     }
   },
   components: {
