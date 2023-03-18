@@ -3,12 +3,15 @@
     <h1>App 根组件</h1>
     <hr/>
     <es-header title="购物车案例"></es-header>
+    <es-footer @fullChange="onFullStateChange"></es-footer>
   </div>
 </template>
 
 <script>
 // 导入 header 组件
 import EsHeader from './components/es-header/EsHeader.vue';
+// 导入 footer 组件
+import EsFooter from './components/es-footer/EsFooter.vue';
 
 export default {
   name:'MyApp',
@@ -31,11 +34,17 @@ export default {
       // 判断是否请求成功
       if (res.status !== 200) return alert('请求商品列表数据失败');
       this.goodslist = res.list;
+    },
+    // 监听选中状态变化的事件
+    onFullStateChange(isfull) {
+      console.log(isfull);
     }
   },
   components: {
     // 注册 header 组件
-    EsHeader
+    EsHeader,
+    // 注册 footer 组件
+    EsFooter
   }
 }
 </script>
