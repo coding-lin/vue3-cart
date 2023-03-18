@@ -19,16 +19,21 @@
         <!-- 商品价格 -->
         <div class="price">￥{{price.toFixed(2)}}</div>
         <!-- 商品数量 -->
-        <div class="count">数量：{{count}}</div>
+        <div class="count">
+          <es-count :num="count" :min="1" @numChange="getNumber"></es-count>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// 导入 count 组件
+import EsCount from '../es-count/EsCount.vue';
+
 export default {
   name: 'EsGoods',
-  emits: ['stateChange'],
+  emits: ['stateChange', 'countChange'],
   props: {
     // 唯一的 key 值
     id: {
@@ -69,7 +74,18 @@ export default {
         id: this.id,
         value: e.target.checked
       })
+    },
+    // 监听数量的变化
+    getNumber(num) {
+      this.$emit('countChange', {
+        id: this.id,
+        value: num
+      })
     }
+  },
+  components: {
+    // 注册 count 组件
+    EsCount
   }
 }
 </script>

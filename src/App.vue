@@ -11,6 +11,7 @@
       :count="item.goods_count"
       :checked="item.goods_state"
       @stateChange="onGoodStateChange"
+      @countChange="onGoodCountChange"
     ></es-goods>
     <es-footer :total="total" :amount="amount" @fullChange="onFullStateChange"></es-footer>
   </div>
@@ -56,6 +57,13 @@ export default {
       // 对对应商品更新选中状态
       if (findResult) {
         findResult.goods_state = e.value;
+      }
+    },
+    // 监听商品数量变化的事件
+    onGoodCountChange(e) {
+      const findResult = this.goodslist.find(x => x.id === e.id);
+      if (findResult) {
+        findResult.goods_count = e.value;
       }
     }
   },
