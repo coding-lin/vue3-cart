@@ -4,7 +4,7 @@
     <div class="left">
       <!-- 复选框 -->
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" :id="id" :checked="checked" />
+        <input type="checkbox" class="custom-control-input" :id="id" :checked="checked" @change="onCheckBoxChange" />
         <!-- 将商品图片包裹于 label 中，点击图片可以切换选中状态 -->
         <label class="custom-control-label" :for="id">
           <img :src="thumb" alt="商品图片" class="thumb" />
@@ -28,6 +28,7 @@
 <script>
 export default {
   name: 'EsGoods',
+  emits: ['stateChange'],
   props: {
     // 唯一的 key 值
     id: {
@@ -58,6 +59,16 @@ export default {
     checked: {
       type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    // 监听复选框选中状态变化的事件
+    onCheckBoxChange(e) {
+      // 向外发送的数据是一个对象，包含了 id 和 value
+      this.$emit('stateChange', {
+        id: this.id,
+        value: e.target.checked
+      })
     }
   }
 }

@@ -10,8 +10,9 @@
       :price="item.goods_price"
       :count="item.goods_count"
       :checked="item.goods_state"
+      @stateChange="onGoodStateChange"
     ></es-goods>
-    <es-footer @fullChange="onFullStateChange"></es-footer>
+    <es-footer :total="total" :amount="amount" @fullChange="onFullStateChange"></es-footer>
   </div>
 </template>
 
@@ -47,7 +48,37 @@ export default {
     },
     // 监听选中状态变化的事件
     onFullStateChange(isfull) {
-      console.log(isfull);
+      this.goodslist.forEach(x => x.goods_state = isfull)
+    },
+    onGoodStateChange(e) {
+      // 根据 id 查找(e 是一个对象，包含了 id 和 value)
+      const findResult = this.goodslist.find(x => x.id === e.id);
+      // 对对应商品更新选中状态
+      if (findResult) {
+        findResult.goods_state = e.value;
+      }
+    }
+  },
+  computed: {
+    // 已勾选商品总价
+    amount() {
+      let totalPrice = 0;
+      this.goodslist
+        .filter(x => x.goods_state)
+        .forEach(x => {
+          totalPrice += x.goods_price * x.goods_count
+        })
+      return totalPrice;
+    },
+    // 已勾选商品的数量
+    total() {
+      let num = 0;
+      this.goodslist
+        .filter(x => x.goods_state)
+        .forEach(x => {
+          num += x.goods_count
+        })
+      return num;
     }
   },
   components: {
@@ -64,5 +95,6 @@ export default {
 <style scoped>
 .app-container {
   padding-top: 45px;
+  padding-bottom: 50px;
 }
 </style>

@@ -11,7 +11,7 @@
       <span class="amount">￥{{amount.toFixed(2)}}</span>
     </div>
     <!-- 结算按钮 -->
-    <button type="button" class="btn btn-primary btn-settle" :disabled="total === 0">结算{{total}}</button>
+    <button type="button" class="btn btn-primary btn-settle" :disabled="total === 0">结算({{total}})</button>
   </div>
 </template>
 
