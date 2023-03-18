@@ -1,8 +1,16 @@
 <template>
   <div class="app-container">
-    <h1>App 根组件</h1>
-    <hr/>
     <es-header title="购物车案例"></es-header>
+    <es-goods 
+      v-for="item in goodslist" 
+      :key="item.id" 
+      :id="item.id"
+      :thumb="item.goods_img"
+      :title="item.goods_name"
+      :price="item.goods_price"
+      :count="item.goods_count"
+      :checked="item.goods_state"
+    ></es-goods>
     <es-footer @fullChange="onFullStateChange"></es-footer>
   </div>
 </template>
@@ -12,6 +20,8 @@
 import EsHeader from './components/es-header/EsHeader.vue';
 // 导入 footer 组件
 import EsFooter from './components/es-footer/EsFooter.vue';
+// 导入 goods 组件
+import EsGoods from './components/es-goods/EsGoods.vue';
 
 export default {
   name:'MyApp',
@@ -44,7 +54,9 @@ export default {
     // 注册 header 组件
     EsHeader,
     // 注册 footer 组件
-    EsFooter
+    EsFooter,
+    // 注册 goods 组件
+    EsGoods
   }
 }
 </script>
