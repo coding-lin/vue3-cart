@@ -5,3 +5,7 @@
 效果如下图：
 
 <img src="./public/1.png" alt="" />
+
+在线体验：
+
+[https://coding-lin.github.io/vue3-cart/](https://coding-lin.github.io/vue3-cart/)
